@@ -11,4 +11,8 @@ public class Category
     {
         Name = name;
     }
+    public Category()
+    {
+        
+    }
 }

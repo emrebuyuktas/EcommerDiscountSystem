@@ -13,4 +13,8 @@ public class Product
         Price = price;
         Category = category;
     }
+    public Product()
+    {
+        
+    }
 }
