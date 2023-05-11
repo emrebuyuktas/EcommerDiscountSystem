@@ -2,12 +2,29 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerDiscountSystem;
-
-public class AppDbContext : DbContext
+public interface IAppDbContext
+{
+    DbSet<Product> Products { get; set; }
+    DbSet<Category> Categories { get; set; }
+    DbSet<Discount> Discounts { get; set; }
+    Task SaveChangesAsync(CancellationToken cancellationToken);
+    void SaveChanges();
+}
+public class AppDbContext : DbContext, IAppDbContext
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Discount> Discounts { get; set; }
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
+    {
+        await base.SaveChangesAsync(cancellationToken);
+    }
+
+    public void SaveChanges()
+    {
+        base.SaveChanges();
+    }
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
